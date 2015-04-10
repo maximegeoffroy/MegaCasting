@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="201db832a0d54e0b93bfd7e62850f9e2" Name="Diagram1">
+        <EntityTypeShape EntityType="MegaCastingModel.Annonceur" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MegaCastingModel.Diffuseur" Width="1.5" PointX="3" PointY="14.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MegaCastingModel.Domaine_Metier" Width="1.5" PointX="0.75" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="MegaCastingModel.Metier" Width="1.5" PointX="3" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="MegaCastingModel.Offre" Width="1.5" PointX="5.25" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="MegaCastingModel.Societe" Width="1.5" PointX="0.75" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="MegaCastingModel.Type_Contrat" Width="1.5" PointX="3" PointY="6.75" IsExpanded="true" />
+        <AssociationConnector Association="MegaCastingModel.FK_Offre_Annonceur" ManuallyRouted="false" />
+        <AssociationConnector Association="MegaCastingModel.FK_Metier_Domaine_Metier" ManuallyRouted="false" />
+        <AssociationConnector Association="MegaCastingModel.FK_Offre_Domaine_Metier" ManuallyRouted="false" />
+        <AssociationConnector Association="MegaCastingModel.FK_Offre_Metier" ManuallyRouted="false" />
+        <AssociationConnector Association="MegaCastingModel.FK_Offre_Type_Contrat" ManuallyRouted="false" />
+        <InheritanceConnector EntityType="MegaCastingModel.Annonceur" />
+        <InheritanceConnector EntityType="MegaCastingModel.Diffuseur" />
+        <EntityTypeShape EntityType="MegaCastingModel.Adresse" Width="1.5" PointX="0.75" PointY="11.25" />
+        <AssociationConnector Association="MegaCastingModel.FK_Societe_Adresse" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
