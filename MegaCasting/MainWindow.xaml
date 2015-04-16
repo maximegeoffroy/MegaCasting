@@ -1,6 +1,29 @@
 ﻿<Window x:Class="MegaCasting.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="MainWindow" Height="350" Width="525">
-    <Grid/>
+        Title="MégaCasting" Height="500" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="150"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Button x:Name="offreBouton" Grid.Row="0" Content="Offre" Click="offreBouton_Click"/>
+            <Button x:Name="societeBouton" Grid.Row="1" Content="Société" Click="societeBouton_Click"/>
+            <Button x:Name="contratBouton" Grid.Row="2" Content="Contrat" Click="contratBouton_Click"/>
+            <Button x:Name="domaineMetierBouton" Grid.Row="3" Content="Domaine métier" Click="domaineMetierBouton_Click"/>
+            <Button x:Name="metierBouton" Grid.Row="4" Content="Métier" Click="metierBouton_Click"/>
+        </Grid>
+        <Grid Grid.Column="1">
+            <ContentControl x:Name="mainContentControl">
+            </ContentControl>
+        </Grid>
+    </Grid>
 </Window>

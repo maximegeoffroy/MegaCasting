@@ -1,4 +1,5 @@
 ﻿using MegaCasting.DB;
+using MegaCasting.UserControls;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,6 +25,36 @@ namespace MegaCasting
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void offreBouton_Click(object sender, RoutedEventArgs e)
+        {
+            offreControl oc = new offreControl();
+            this.mainContentControl.Content = oc;
+        }
+
+        private void societeBouton_Click(object sender, RoutedEventArgs e)
+        {
+            societeControl sc = new societeControl();
+            this.mainContentControl.Content = sc;
+        }
+
+        private void contratBouton_Click(object sender, RoutedEventArgs e)
+        {
+            contratControl cc = new contratControl();
+            this.mainContentControl.Content = cc;
+        }
+
+        private void domaineMetierBouton_Click(object sender, RoutedEventArgs e)
+        {
+            domaineMetierControl dmc = new domaineMetierControl();
+            this.mainContentControl.Content = dmc;
+        }
+
+        private void metierBouton_Click(object sender, RoutedEventArgs e)
+        {
+            metierControl mc = new metierControl();
+            this.mainContentControl.Content = mc;
         }
     }
 }

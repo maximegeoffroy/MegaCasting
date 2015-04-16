@@ -60,6 +60,21 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="UserControls\contratControl.xaml.cs">
+      <DependentUpon>contratControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\domaineMetierControl.xaml.cs">
+      <DependentUpon>domaineMetierControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\metierControl.xaml.cs">
+      <DependentUpon>metierControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\offreControl.xaml.cs">
+      <DependentUpon>offreControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\societeControl.xaml.cs">
+      <DependentUpon>societeControl.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -72,6 +87,26 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="UserControls\contratControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\domaineMetierControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\metierControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\offreControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\societeControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
