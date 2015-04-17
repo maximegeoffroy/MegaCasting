@@ -24,6 +24,7 @@ namespace MegaCasting
     {
         public MainWindow()
         {
+            WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
             InitializeComponent();
         }
 
@@ -55,6 +56,11 @@ namespace MegaCasting
         {
             metierControl mc = new metierControl();
             this.mainContentControl.Content = mc;
+        }
+
+        private void Window_Closed(object sender, EventArgs e)
+        {
+            App.dbContext.Dispose();
         }
     }
 }

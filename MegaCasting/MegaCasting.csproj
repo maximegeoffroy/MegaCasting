@@ -75,6 +75,9 @@
     <Compile Include="UserControls\societeControl.xaml.cs">
       <DependentUpon>societeControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Windows\ajouterTypeContrat.xaml.cs">
+      <DependentUpon>ajouterTypeContrat.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -104,6 +107,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControls\societeControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\ajouterTypeContrat.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

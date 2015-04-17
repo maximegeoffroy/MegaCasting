@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MegaCasting.DB;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -13,5 +14,6 @@ namespace MegaCasting
     /// </summary>
     public partial class App : Application
     {
+        public static MegaCastingEntities dbContext = new MegaCastingEntities();
     }
 }
