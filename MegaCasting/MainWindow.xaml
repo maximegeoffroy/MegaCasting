@@ -1,7 +1,7 @@
 ﻿<Window x:Class="MegaCasting.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="MégaCasting" Height="500" Width="800" Closed="Window_Closed">
+        Title="MégaCasting" Height="500" Width="1000" Closed="Window_Closed">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="150"/>

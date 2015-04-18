@@ -6,5 +6,100 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="120" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal" Margin="0,25,0,0" HorizontalAlignment="Right" VerticalAlignment="Center">
+                <Label>Intitulé</Label>
+                <TextBox Width="150" Text="{Binding selectedOffre.Intitule, UpdateSourceTrigger=PropertyChanged}" />
+            </StackPanel>
+            <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Horizontal" Margin="0,25,0,0" HorizontalAlignment="Right" VerticalAlignment="Center">
+                <Label>Référence</Label>
+                <TextBox Width="150" Text="{Binding selectedOffre.Reference, UpdateSourceTrigger=PropertyChanged}" />
+            </StackPanel>
+            <StackPanel Grid.Row="2" Grid.Column="0" Orientation="Horizontal" Margin="0,25,0,0" HorizontalAlignment="Right" VerticalAlignment="Center">
+                <Label>Date publication</Label>
+                <DatePicker Width="150" SelectedDate="{Binding selectedOffre.DatePublication, UpdateSourceTrigger=PropertyChanged}"/>
+            </StackPanel>
+            <StackPanel Grid.Row="3" Grid.Column="0" Orientation="Horizontal" Margin="0,25,0,0" HorizontalAlignment="Right" VerticalAlignment="Center">
+                <Label>Durée diffusion</Label>
+                <TextBox Width="150" Text="{Binding selectedOffre.DureeDiffusion, UpdateSourceTrigger=PropertyChanged}" />
+            </StackPanel>
+            <StackPanel Grid.Row="4" Grid.Column="0" Orientation="Horizontal" Margin="0,25,0,0" HorizontalAlignment="Right" VerticalAlignment="Center">
+                <Label>Date début du contrat</Label>
+                <DatePicker Width="150" SelectedDate="{Binding selectedOffre.DateDebutContrat, UpdateSourceTrigger=PropertyChanged}"/>
+            </StackPanel>
+            <StackPanel Grid.Row="5" Grid.Column="0" Orientation="Horizontal" Margin="0,25,0,0" HorizontalAlignment="Right" VerticalAlignment="Center">
+                <Label>Nombre de postes</Label>
+                <TextBox Width="150" Text="{Binding selectedOffre.NbPostes, UpdateSourceTrigger=PropertyChanged}" />
+            </StackPanel>
+            <StackPanel Grid.Row="6" Grid.Column="0" Orientation="Horizontal" Margin="0,25,0,0" HorizontalAlignment="Right" VerticalAlignment="Center">
+                <Label>Localisation</Label>
+                <TextBox Width="150" Text="{Binding selectedOffre.Localisation, UpdateSourceTrigger=PropertyChanged}" />
+            </StackPanel>
+            <StackPanel Grid.Row="7" Grid.Column="0" Orientation="Horizontal" Margin="0,25,0,0" HorizontalAlignment="Right" VerticalAlignment="Center">
+                <Label>Description du poste</Label>
+                <TextBox Width="150" Text="{Binding selectedOffre.DescriptionPoste, UpdateSourceTrigger=PropertyChanged}" />
+            </StackPanel>
+            <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,25,20,0">
+                <Label>Description du profil</Label>
+                <TextBox Width="150" Text="{Binding selectedOffre.DescriptionProfil, UpdateSourceTrigger=PropertyChanged}" />
+            </StackPanel>
+            <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,25,20,0">
+                <Label>Téléphone</Label>
+                <TextBox Width="150" Text="{Binding selectedOffre.Telephone, UpdateSourceTrigger=PropertyChanged}" />
+            </StackPanel>
+            <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,25,20,0">
+                <Label>Email</Label>
+                <TextBox Width="150" Text="{Binding selectedOffre.Email, UpdateSourceTrigger=PropertyChanged}" />
+            </StackPanel>
+            <StackPanel Grid.Row="3" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,25,20,0">
+                <Label>Type contrat</Label>
+                <ComboBox x:Name="listeTypesContrat" ItemsSource="{Binding TypesContrat}" Width="150"/>
+            </StackPanel>
+            <StackPanel Grid.Row="4" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,25,20,0">
+                <Label>Métier</Label>
+                <ComboBox x:Name="listeMetier" ItemsSource="{Binding Metiers}" Width="150"/>
+            </StackPanel>
+            <StackPanel Grid.Row="5" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,25,20,0">
+                <Label>Domaine Métier</Label>
+                <ComboBox x:Name="listeDomainesMetier" ItemsSource="{Binding DomainesMetier}" Width="150"/>
+            </StackPanel>
+            <StackPanel Grid.Row="6" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,25,20,0">
+                <Label>Annonceurs</Label>
+                <ComboBox x:Name="listeAnnonceurs" ItemsSource="{Binding Annonceurs}" Width="150"/>
+            </StackPanel>
+            <Button Grid.Row="7" Grid.Column="1" x:Name="boutonEnregistrer" Click="boutonEnregistrer_Click" Content="Enregistrer" Width="100" Margin="0,25,20,0" />
+        </Grid>
+        <StackPanel Grid.Column="1" Orientation="Vertical">
+            <ListBox x:Name="listeOffre" ItemsSource="{Binding Offres}" SelectedItem="{Binding selectedOffre}" SelectionChanged="listeOffre_SelectionChanged" SelectedIndex="0">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Label Content="{Binding Intitule}"></Label>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+            <Button Grid.Column="1" x:Name="boutonSupprimer" Content="Supprimer"/>
+            <Button Grid.Column="1" x:Name="boutonNouvelle" Content="Nouvelle" Click="boutonNouvelle_Click"/>
+        </StackPanel>
     </Grid>
 </UserControl>

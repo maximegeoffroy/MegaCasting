@@ -13,7 +13,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
-        <StackPanel Grid.Row="2" Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" >
+        <StackPanel Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" >
             <Label>Libellé</Label>
             <TextBox Width="100" Text="{Binding selectedTypeContrat.Libelle, UpdateSourceTrigger=PropertyChanged}" LostFocus="TextBox_LostFocus"/>
         </StackPanel>

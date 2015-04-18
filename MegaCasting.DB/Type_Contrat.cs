@@ -21,6 +21,11 @@ namespace MegaCasting.DB
     
         public long Identifiant { get; set; }
         public string Libelle { get; set; }
+
+        public override string ToString()
+        {
+            return this.Libelle;
+        }
     
         public virtual ICollection<Offre> Offres { get; set; }
     }
