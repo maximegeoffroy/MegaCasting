@@ -31,6 +31,15 @@ namespace MegaCasting.UserControls
             set { _metiers = value; }
         }
 
+        private ObservableCollection<Domaine_Metier> _domaineMetiers = new ObservableCollection<Domaine_Metier>();
+
+        public ObservableCollection<Domaine_Metier> DomaineMetiers
+        {
+            get { return _domaineMetiers; }
+            set { _domaineMetiers = value; }
+        }
+        
+
 
 
         public Metier selectedMetier
@@ -50,6 +59,10 @@ namespace MegaCasting.UserControls
             this.DataContext = this;
 
             InitializeComponent();
+
+            App.dbContext.Domaine_Metier.ToList().ForEach(
+                dm => DomaineMetiers.Add(dm)
+                );
 
             App.dbContext.Metiers.ToList().ForEach(
                 m => Metiers.Add(m)

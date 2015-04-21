@@ -24,7 +24,7 @@ namespace MegaCasting.UserControls
     /// </summary>
     public partial class domaineMetierControl : UserControl
     {
-        private ObservableCollection<Domaine_Metier> _domaineMetiers;
+        private ObservableCollection<Domaine_Metier> _domaineMetiers = new ObservableCollection<Domaine_Metier>();
 
         public ObservableCollection<Domaine_Metier> DomaineMetiers
         {

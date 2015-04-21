@@ -16,7 +16,7 @@
         </StackPanel>
         <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
             <Label>Domaine Métier</Label>
-            <ComboBox x:Name="listeDomaineMetier"/>
+            <ComboBox x:Name="listeDomaineMetier" Width="150" ItemsSource="{Binding DomaineMetiers}" SelectedIndex="0"/>
         </StackPanel>
         <Button Grid.Row="3" x:Name="boutonAjouter" Content="Ajouter" Click="boutonAjouter_Click"/>
     </Grid>

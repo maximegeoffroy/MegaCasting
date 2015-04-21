@@ -19,14 +19,14 @@
             </Grid.RowDefinitions>
             <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal" Margin="0,25,0,0" HorizontalAlignment="Right" VerticalAlignment="Center">
                 <Label>Libellé</Label>
-                <TextBox Width="150" Text=""/>
+                <TextBox Width="150" Text="{Binding selectedDomaineMetier.Libelle, UpdateSourceTrigger=PropertyChanged}"/>
             </StackPanel>
         </Grid>
         <StackPanel Grid.Column="1" Orientation="Vertical">
-            <ListBox x:Name="listeDomaineMetier" ItemsSource="" SelectedItem="" SelectionChanged="" SelectedIndex="0">
+            <ListBox x:Name="listeDomaineMetier" ItemsSource="{Binding DomaineMetiers}" SelectedItem="{Binding selectedDomaineMetier}" SelectedIndex="0">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <Label Content=""></Label>
+                        <Label Content="{Binding Libelle}"></Label>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
