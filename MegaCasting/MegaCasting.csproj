@@ -43,6 +43,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.Entity" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -74,6 +75,12 @@
     </Compile>
     <Compile Include="UserControls\societeControl.xaml.cs">
       <DependentUpon>societeControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\ajouterDomaineMetier.xaml.cs">
+      <DependentUpon>ajouterDomaineMetier.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\ajouterMetier.xaml.cs">
+      <DependentUpon>ajouterMetier.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\ajouterOffre.xaml.cs">
       <DependentUpon>ajouterOffre.xaml</DependentUpon>
@@ -110,6 +117,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControls\societeControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\ajouterDomaineMetier.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\ajouterMetier.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

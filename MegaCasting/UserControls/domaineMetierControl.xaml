@@ -6,6 +6,32 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
-            
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="120"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal" Margin="0,25,0,0" HorizontalAlignment="Right" VerticalAlignment="Center">
+                <Label>Libellé</Label>
+                <TextBox Width="150" Text=""/>
+            </StackPanel>
+        </Grid>
+        <StackPanel Grid.Column="1" Orientation="Vertical">
+            <ListBox x:Name="listeDomaineMetier" ItemsSource="" SelectedItem="" SelectionChanged="" SelectedIndex="0">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Label Content=""></Label>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+            <Button Grid.Column="1" x:Name="boutonSupprimer" Content="Supprimer" Click="boutonSupprimer_Click"/>
+            <Button Grid.Column="1" x:Name="boutonNouveau" Content="Nouveau" Click="boutonNouveau_Click"/>
+        </StackPanel>
     </Grid>
 </UserControl>
