@@ -12,10 +12,14 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
         <StackPanel Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" >
             <Label>Libellé</Label>
-            <TextBox Width="100" Text="{Binding selectedTypeContrat.Libelle, UpdateSourceTrigger=PropertyChanged}" LostFocus="TextBox_LostFocus"/>
+            <TextBox Width="100" Text="{Binding selectedTypeContrat.Libelle, UpdateSourceTrigger=PropertyChanged}" />
+        </StackPanel>
+        <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Button x:Name="boutonEnregistrer" Content="Enregistrer" Click="boutonEnregistrer_Click" Width="100"/>
         </StackPanel>
         <StackPanel Grid.Column="1" Orientation="Vertical">
             <ListBox x:Name="listeTypesContrat" ItemsSource="{Binding Contrats}" SelectedItem="{Binding selectedTypeContrat}" SelectedIndex="0">

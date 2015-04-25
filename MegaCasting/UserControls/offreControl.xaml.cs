@@ -47,14 +47,6 @@ namespace MegaCasting.UserControls
             set { _metiers = value; }
         }
 
-        private ObservableCollection<Domaine_Metier> _domainesMetier = new ObservableCollection<Domaine_Metier>();
-
-        public ObservableCollection<Domaine_Metier> DomainesMetier
-        {
-            get { return _domainesMetier; }
-            set { _domainesMetier = value; }
-        }
-
         private ObservableCollection<Annonceur> _annonceurs = new ObservableCollection<Annonceur>();
 
         public ObservableCollection<Annonceur> Annonceurs
@@ -62,8 +54,7 @@ namespace MegaCasting.UserControls
             get { return _annonceurs; }
             set { _annonceurs = value; }
         }
-        
-        
+              
         public Offre selectedOffre
         {
             get { return (Offre)GetValue(selectedOffreProperty); }
@@ -80,6 +71,11 @@ namespace MegaCasting.UserControls
 
             InitializeComponent();
 
+            Chargement();
+        }
+
+        public void Chargement()
+        {
             //Remplit la liste des offres en fonction du contenu de la base de données
             App.dbContext.Offres.ToList().ForEach(
                 o => Offres.Add(o)
@@ -95,40 +91,44 @@ namespace MegaCasting.UserControls
                 m => Metiers.Add(m)
             );
 
-            //Remplit la liste des domaines métier en fonction du contenu de la base de données
-            App.dbContext.Domaine_Metier.ToList().ForEach(
-                dm => DomainesMetier.Add(dm)
-            );
-
             //Remplit la liste des annonceurs en fonction du contenu de la base de données
             App.dbContext.Societes.OfType<Annonceur>().ToList().ForEach(
                 a => Annonceurs.Add(a)
             );
         }
 
-        private void listeOffre_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            this.listeTypesContrat.SelectedItem = selectedOffre.Type_Contrat;
-            this.listeMetier.SelectedItem = selectedOffre.Metier;
-            this.listeDomainesMetier.SelectedItem = selectedOffre.Domaine_Metier;
-            this.listeAnnonceurs.SelectedItem = selectedOffre.Annonceur;
-        }
-
         private void boutonEnregistrer_Click(object sender, RoutedEventArgs e)
         {
+            Metier m = (Metier)this.listeMetier.SelectedItem;
 
-            selectedOffre.Type_Contrat = (Type_Contrat)this.listeTypesContrat.SelectedItem;
-            selectedOffre.Metier = (Metier)this.listeMetier.SelectedItem;
-            selectedOffre.Domaine_Metier = (Domaine_Metier)this.listeDomainesMetier.SelectedItem;
-            selectedOffre.Annonceur = (Annonceur)this.listeAnnonceurs.SelectedItem;
+            selectedOffre.Domaine_Metier = m.Domaine_Metier;
 
             App.dbContext.SaveChangesAsync();
         }
 
         private void boutonNouvelle_Click(object sender, RoutedEventArgs e)
         {
-            ajouterOffre ao = new ajouterOffre();
+            ajouterOffre ao = new ajouterOffre(this);
             ao.Show();
+        }
+
+        private void boutonSupprimer_Click(object sender, RoutedEventArgs e)
+        {
+            if (selectedOffre != null)
+            {
+                try
+                {
+                    App.dbContext.Offres.Remove(selectedOffre);
+                    App.dbContext.SaveChanges();
+
+                    Offres.Remove(selectedOffre);
+                }
+                catch (Exception)
+                {
+                    
+                    throw;
+                }
+            }
         }
 
     }

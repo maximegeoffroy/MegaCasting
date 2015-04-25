@@ -1,7 +1,7 @@
 ﻿<Window x:Class="MegaCasting.Windows.ajouterOffre"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Ajouter une offre" Height="500" Width="800">
+        Title="Ajouter une offre" Height="700" Width="1000">
     <Grid Grid.Row="1">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
@@ -18,65 +18,217 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal" Margin="0,25,0,0" HorizontalAlignment="Right" VerticalAlignment="Center">
-            <Label>Intitulé</Label>
-            <TextBox Width="150" />
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <StackPanel Grid.Row="0" Orientation="Horizontal">
+                    <Label >Intitulé</Label>
+                    <TextBox Width="150" Text="{Binding nouvelleOffre.Intitule}"/>
+                </StackPanel>
+                <StackPanel x:Name="stackPanelIntitule" Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" Visibility="Hidden">
+                    <Label Content="/!\" Foreground="Red"/>
+                    <Label Content="Erreur d'intitulé" Foreground="Red"/>
+                </StackPanel>
+            </Grid>
         </StackPanel>
         <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Horizontal" Margin="0,25,0,0" HorizontalAlignment="Right" VerticalAlignment="Center">
-            <Label>Référence</Label>
-            <TextBox Width="150" />
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <StackPanel Grid.Row="0" Orientation="Horizontal">
+                    <Label>Référence</Label>
+                    <TextBox Width="150" Text="{Binding nouvelleOffre.Reference}"/>
+                </StackPanel>
+                <StackPanel x:Name="stackPanelReference" Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" Visibility="Hidden">
+                    <Label Content="/!\" Foreground="Red"/>
+                    <Label Content="Erreur de référence" Foreground="Red"/>
+                </StackPanel>
+            </Grid>
         </StackPanel>
         <StackPanel Grid.Row="2" Grid.Column="0" Orientation="Horizontal" Margin="0,25,0,0" HorizontalAlignment="Right" VerticalAlignment="Center">
-            <Label>Date publication</Label>
-            <DatePicker Width="150" />
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <StackPanel Grid.Row="0" Orientation="Horizontal">
+                    <Label>Date publication</Label>
+                    <DatePicker Width="150" SelectedDate="{Binding nouvelleOffre.DatePublication}"/>
+                </StackPanel>
+                <StackPanel x:Name="stackPanelDatePublication" Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" Visibility="Hidden">
+                    <Label Content="/!\" Foreground="Red"/>
+                    <Label Content="Erreur de date de publication" Foreground="Red"/>
+                </StackPanel>
+            </Grid>
         </StackPanel>
         <StackPanel Grid.Row="3" Grid.Column="0" Orientation="Horizontal" Margin="0,25,0,0" HorizontalAlignment="Right" VerticalAlignment="Center">
-            <Label>Durée diffusion</Label>
-            <TextBox Width="150" />
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <StackPanel Grid.Row="0" Orientation="Horizontal">
+                    <Label>Durée diffusion</Label>
+                    <TextBox x:Name="textBoxDureeDiffusion" Width="150" Text="{Binding nouvelleOffre.DureeDiffusion}"/>
+                </StackPanel>
+                <StackPanel x:Name="stackPanelDureeDiffusion" Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" Visibility="Hidden">
+                    <Label Content="/!\" Foreground="Red"/>
+                    <Label Content="Erreur de durée de diffusion" Foreground="Red"/>
+                </StackPanel>
+            </Grid>
         </StackPanel>
         <StackPanel Grid.Row="4" Grid.Column="0" Orientation="Horizontal" Margin="0,25,0,0" HorizontalAlignment="Right" VerticalAlignment="Center">
-            <Label>Date début du contrat</Label>
-            <DatePicker Width="150"/>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <StackPanel Grid.Row="0" Orientation="Horizontal">
+                    <Label>Date début du contrat</Label>
+                    <DatePicker Width="150" SelectedDate="{Binding nouvelleOffre.DateDebutContrat}"/>
+                </StackPanel>
+                <StackPanel x:Name="stackPanelDateDebutContrat" Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" Visibility="Hidden">
+                    <Label Content="/!\" Foreground="Red"/>
+                    <Label Content="Erreur de date de début de contrat" Foreground="Red"/>
+                </StackPanel>
+            </Grid>
         </StackPanel>
         <StackPanel Grid.Row="5" Grid.Column="0" Orientation="Horizontal" Margin="0,25,0,0" HorizontalAlignment="Right" VerticalAlignment="Center">
-            <Label>Nombre de postes</Label>
-            <TextBox Width="150" />
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <StackPanel Grid.Row="0" Orientation="Horizontal">
+                    <Label>Nombre de postes</Label>
+                    <TextBox x:Name="textBoxPoste" Width="150" Text="{Binding nouvelleOffre.NbPostes}"/>
+                </StackPanel>
+                <StackPanel x:Name="stackPanelPoste" Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" Visibility="Hidden">
+                    <Label Content="/!\" Foreground="Red"/>
+                    <Label Content="Erreur sur le nombre de poste" Foreground="Red"/>
+                </StackPanel>
+            </Grid>
         </StackPanel>
         <StackPanel Grid.Row="6" Grid.Column="0" Orientation="Horizontal" Margin="0,25,0,0" HorizontalAlignment="Right" VerticalAlignment="Center">
-            <Label>Localisation</Label>
-            <TextBox Width="150" />
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <StackPanel Grid.Row="0" Orientation="Horizontal">
+                    <Label>Localisation</Label>
+                    <TextBox x:Name="textBoxLocalisation" Width="150" Text="{Binding nouvelleOffre.Localisation}"/>
+                </StackPanel>
+                <StackPanel x:Name="stackPanelLocalisation" Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" Visibility="Hidden">
+                    <Label Content="/!\" Foreground="Red"/>
+                    <Label Content="Erreur de localisation" Foreground="Red"/>
+                </StackPanel>
+            </Grid>
         </StackPanel>
         <StackPanel Grid.Row="7" Grid.Column="0" Orientation="Horizontal" Margin="0,25,0,0" HorizontalAlignment="Right" VerticalAlignment="Center">
-            <Label>Description du poste</Label>
-            <TextBox Width="150" />
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <StackPanel Grid.Row="0" Orientation="Horizontal">
+                    <Label>Description du poste</Label>
+                    <TextBox x:Name="textBoxDescriptionPoste" Width="150" Text="{Binding nouvelleOffre.DescriptionPoste}"/>
+                </StackPanel>
+                <StackPanel x:Name="stackPanelDescriptionPoste" Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" Visibility="Hidden">
+                    <Label Content="/!\" Foreground="Red"/>
+                    <Label Content="Erreur sur la description du poste" Foreground="Red"/>
+                </StackPanel>
+            </Grid>
         </StackPanel>
         <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,25,20,0">
-            <Label>Description du profil</Label>
-            <TextBox Width="150" />
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <StackPanel Grid.Row="0" Orientation="Horizontal">
+                    <Label>Description du profil</Label>
+                    <TextBox x:Name="textBoxDescriptionProfil" Width="150" Text="{Binding nouvelleOffre.DescriptionProfil}"/>
+                </StackPanel>
+                <StackPanel x:Name="stackPanelDescriptionProfil" Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" Visibility="Hidden">
+                    <Label Content="/!\" Foreground="Red"/>
+                    <Label Content="Erreur sur la description de profil" Foreground="Red"/>
+                </StackPanel>
+            </Grid>
         </StackPanel>
         <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,25,20,0">
-            <Label>Téléphone</Label>
-            <TextBox Width="150" />
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <StackPanel Grid.Row="0" Orientation="Horizontal">
+                    <Label>Téléphone</Label>
+                    <TextBox x:Name="textBoxTelephone" Width="150" Text="{Binding nouvelleOffre.Telephone}"/>
+                </StackPanel>
+                <StackPanel x:Name="stackPanelTelephone" Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" Visibility="Hidden">
+                    <Label Content="/!\" Foreground="Red"/>
+                    <Label Content="Erreur de téléphone" Foreground="Red"/>
+                </StackPanel>
+            </Grid>
         </StackPanel>
         <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,25,20,0">
-            <Label>Email</Label>
-            <TextBox Width="150" />
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <StackPanel Grid.Row="0" Orientation="Horizontal">
+                    <Label>Email</Label>
+                    <TextBox x:Name="textBoxEmail" Width="150" Text="{Binding nouvelleOffre.Email}"/>
+                </StackPanel>
+                <StackPanel x:Name="stackPanelEmail" Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" Visibility="Hidden">
+                    <Label Content="/!\" Foreground="Red"/>
+                    <Label Content="Erreur d'email" Foreground="Red"/>
+                </StackPanel>
+            </Grid>
         </StackPanel>
         <StackPanel Grid.Row="3" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,25,20,0">
-            <Label>Type contrat</Label>
-            <ComboBox x:Name="listeTypesContrat" ItemsSource="{Binding TypesContrat}" Width="150"/>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <StackPanel Grid.Row="0" Orientation="Horizontal">
+                    <Label>Type contrat</Label>
+                    <ComboBox x:Name="listeTypesContrat" ItemsSource="{Binding TypesContrat}" Width="150" SelectedIndex="0" SelectedItem="{Binding nouvelleOffre.Type_Contrat}"/>
+                </StackPanel>
+            </Grid>
         </StackPanel>
         <StackPanel Grid.Row="4" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,25,20,0">
-            <Label>Métier</Label>
-            <ComboBox x:Name="listeMetier"  Width="150"/>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <StackPanel Grid.Row="0" Orientation="Horizontal">
+                    <Label>Métier</Label>
+                    <ComboBox x:Name="listeMetier"  ItemsSource="{Binding Metiers}" Width="150" SelectedIndex="0" SelectedItem="{Binding nouvelleOffre.Metier}"/>
+                </StackPanel>
+            </Grid>
         </StackPanel>
         <StackPanel Grid.Row="5" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,25,20,0">
-            <Label>Domaine Métier</Label>
-            <ComboBox x:Name="listeDomainesMetier" Width="150"/>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <StackPanel Grid.Row="0" Orientation="Horizontal">
+                    <Label>Annonceurs</Label>
+                    <ComboBox x:Name="listeAnnonceurs" ItemsSource="{Binding Annonceurs}" Width="150" SelectedIndex="0" SelectedItem="{Binding nouvelleOffre.Annonceur}"/>
+                </StackPanel>
+            </Grid>
         </StackPanel>
-        <StackPanel Grid.Row="6" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,25,20,0">
-            <Label>Annonceurs</Label>
-            <ComboBox x:Name="listeAnnonceurs" Width="150"/>
-        </StackPanel>
-        <Button Grid.Row="7" Grid.Column="1" x:Name="boutonAjouter" Content="Ajouter" Width="100" Margin="0,25,20,0" />
+        <Button Grid.Row="6" Grid.Column="1" x:Name="boutonAjouter" Width="100" Content="Ajouter" Margin="0,25,20,0" Click="boutonAjouter_Click" HorizontalAlignment="Right"/>
     </Grid>
 </Window>

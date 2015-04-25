@@ -74,31 +74,27 @@
             </StackPanel>
             <StackPanel Grid.Row="3" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,25,20,0">
                 <Label>Type contrat</Label>
-                <ComboBox x:Name="listeTypesContrat" ItemsSource="{Binding TypesContrat}" Width="150"/>
+                <ComboBox x:Name="listeTypesContrat" ItemsSource="{Binding TypesContrat}" Width="150" SelectedItem="{Binding selectedOffre.Type_Contrat}"/>
             </StackPanel>
             <StackPanel Grid.Row="4" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,25,20,0">
                 <Label>Métier</Label>
-                <ComboBox x:Name="listeMetier" ItemsSource="{Binding Metiers}" Width="150"/>
+                <ComboBox x:Name="listeMetier" ItemsSource="{Binding Metiers}" Width="150" SelectedItem="{Binding selectedOffre.Metier}"/>
             </StackPanel>
             <StackPanel Grid.Row="5" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,25,20,0">
-                <Label>Domaine Métier</Label>
-                <ComboBox x:Name="listeDomainesMetier" ItemsSource="{Binding DomainesMetier}" Width="150"/>
-            </StackPanel>
-            <StackPanel Grid.Row="6" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,25,20,0">
                 <Label>Annonceurs</Label>
-                <ComboBox x:Name="listeAnnonceurs" ItemsSource="{Binding Annonceurs}" Width="150"/>
+                <ComboBox x:Name="listeAnnonceurs" ItemsSource="{Binding Annonceurs}" Width="150" SelectedItem="{Binding selectedOffre.Annonceur}"/>
             </StackPanel>
-            <Button Grid.Row="7" Grid.Column="1" x:Name="boutonEnregistrer" Click="boutonEnregistrer_Click" Content="Enregistrer" Width="100" Margin="0,25,20,0" />
+            <Button Grid.Row="6" Grid.Column="1" x:Name="boutonEnregistrer" Click="boutonEnregistrer_Click" Content="Enregistrer" Width="100" Margin="0,25,20,0" />
         </Grid>
         <StackPanel Grid.Column="1" Orientation="Vertical">
-            <ListBox x:Name="listeOffre" ItemsSource="{Binding Offres}" SelectedItem="{Binding selectedOffre}" SelectionChanged="listeOffre_SelectionChanged" SelectedIndex="0">
+            <ListBox x:Name="listeOffre" ItemsSource="{Binding Offres}" SelectedItem="{Binding selectedOffre}" SelectedIndex="0">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Label Content="{Binding Intitule}"></Label>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
-            <Button Grid.Column="1" x:Name="boutonSupprimer" Content="Supprimer"/>
+            <Button Grid.Column="1" x:Name="boutonSupprimer" Content="Supprimer" Click="boutonSupprimer_Click"/>
             <Button Grid.Column="1" x:Name="boutonNouvelle" Content="Nouvelle" Click="boutonNouvelle_Click"/>
         </StackPanel>
     </Grid>

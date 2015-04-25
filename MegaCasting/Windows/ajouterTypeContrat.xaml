@@ -5,13 +5,21 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
-        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <Label>Intitulé</Label>
-            <TextBox x:Name="textBoxLibelle" Width="150"/>
-            <Button x:Name="boutonAjouter" Content="Ajouter" Click="boutonAjouter_Click" />
+        <StackPanel Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0 65 0 0">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <StackPanel Grid.Row="0" Orientation="Horizontal">
+                    <Label>Intitulé</Label>
+                    <TextBox x:Name="textBoxLibelle" Width="150"/>
+                </StackPanel>
+                <StackPanel Grid.Row="1" >
+                    <Button x:Name="boutonAjouter" Content="Ajouter" Click="boutonAjouter_Click" Width="100" Margin="0 10 0 0"/>
+                </StackPanel>
+            </Grid>
         </StackPanel>
     </Grid>
 </Window>

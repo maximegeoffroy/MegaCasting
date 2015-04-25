@@ -53,11 +53,6 @@ namespace MegaCasting.UserControls
             );
         }
 
-        private void TextBox_LostFocus(object sender, RoutedEventArgs e)
-        {
-            App.dbContext.SaveChangesAsync();
-        }
-
         private void boutonSupprimer_Click(object sender, RoutedEventArgs e)
         {
             if(selectedTypeContrat != null)
@@ -80,6 +75,11 @@ namespace MegaCasting.UserControls
         {
             ajouterTypeContrat atc = new ajouterTypeContrat(this);
             atc.Show();
+        }
+
+        private void boutonEnregistrer_Click(object sender, RoutedEventArgs e)
+        {
+            App.dbContext.SaveChanges();
         }
     }
 }
