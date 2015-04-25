@@ -22,10 +22,5 @@ namespace MegaCasting.DB
         public long IdentifiantAdresse { get; set; }
     
         public virtual Adresse Adresse { get; set; }
-
-        public override string ToString()
-        {
-            return this.RaisonSociale;
-        }
     }
 }

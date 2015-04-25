@@ -1,4 +1,7 @@
-﻿using System;
+﻿using MegaCasting.DB;
+using MegaCasting.Windows;
+using System;
+using System.Collections.ObjectModel;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +23,72 @@ namespace MegaCasting.UserControls
     /// </summary>
     public partial class metierControl : UserControl
     {
+        private ObservableCollection<Metier> _metiers = new ObservableCollection<Metier>();
+
+        public ObservableCollection<Metier> Metiers
+        {
+            get { return _metiers; }
+            set { _metiers = value; }
+        }
+
+        private ObservableCollection<Domaine_Metier> _domaineMetiers = new ObservableCollection<Domaine_Metier>();
+
+        public ObservableCollection<Domaine_Metier> DomaineMetiers
+        {
+            get { return _domaineMetiers; }
+            set { _domaineMetiers = value; }
+        }
+        
+
+
+
+        public Metier selectedMetier
+        {
+            get { return (Metier)GetValue(selectedMetierProperty); }
+            set { SetValue(selectedMetierProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for selectedMetier.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty selectedMetierProperty =
+            DependencyProperty.Register("selectedMetier", typeof(Metier), typeof(UserControl), new PropertyMetadata(null));
+
+
+
         public metierControl()
         {
+            this.DataContext = this;
+
             InitializeComponent();
+
+            App.dbContext.Domaine_Metier.ToList().ForEach(
+                dm => DomaineMetiers.Add(dm)
+                );
+
+            App.dbContext.Metiers.ToList().ForEach(
+                m => Metiers.Add(m)
+                );
+        }
+
+        private void boutonNouveau_Click(object sender, RoutedEventArgs e)
+        {
+            ajouterMetier am = new ajouterMetier(this);
+            am.Show();
+        }
+        
+        private void boutonSupprimer_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                App.dbContext.Metiers.Remove(selectedMetier);
+                App.dbContext.SaveChanges();
+
+                Metiers.Remove(selectedMetier);
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
     }
 }

@@ -22,11 +22,6 @@ namespace MegaCasting.DB
         public long Identifiant { get; set; }
         public string Libelle { get; set; }
         public long IdentifiantDomaine_Metier { get; set; }
-
-        public override string ToString()
-        {
-            return this.Libelle;
-        }
     
         public virtual Domaine_Metier Domaine_Metier { get; set; }
         public virtual ICollection<Offre> Offres { get; set; }
