@@ -38,9 +38,6 @@ namespace MegaCasting.UserControls
             get { return _domaineMetiers; }
             set { _domaineMetiers = value; }
         }
-        
-
-
 
         public Metier selectedMetier
         {
@@ -69,25 +66,73 @@ namespace MegaCasting.UserControls
                 );
         }
 
+        public Boolean VerificationFormulaire()
+        {
+            this.labelErreurLibelle.Visibility = System.Windows.Visibility.Hidden;
+            Boolean ok = true;
+
+            if (selectedMetier.Libelle == null | selectedMetier.Libelle.Trim() == "")
+            {
+                this.labelErreurLibelle.Visibility = System.Windows.Visibility.Visible;
+                ok = false;
+            }
+            return ok;
+        }
+
         private void boutonNouveau_Click(object sender, RoutedEventArgs e)
         {
             ajouterMetier am = new ajouterMetier(this);
             am.Show();
         }
-        
+
         private void boutonSupprimer_Click(object sender, RoutedEventArgs e)
         {
-            try
+            if (selectedMetier != null)
             {
-                App.dbContext.Metiers.Remove(selectedMetier);
-                App.dbContext.SaveChanges();
+                Offre o = App.dbContext.Offres.FirstOrDefault(oTemp => oTemp.IdentifiantMetier == selectedMetier.Identifiant);
 
-                Metiers.Remove(selectedMetier);
+                if (o == null)
+                {
+                    try
+                    {
+                        App.dbContext.Metiers.Remove(selectedMetier);
+                        App.dbContext.SaveChanges();
 
+                        Metiers.Remove(selectedMetier);
+                        this.listeMetier.SelectedIndex = 0;
+                    }
+                    catch (Exception)
+                    {
+                        throw;
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Impossible de supprimer le métier car il est rataché à une ou plusieurs offre(s)", "Erreur de suppression", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             }
-            catch (Exception)
+        }
+
+        private void boutonEnregistrer_Click(object sender, RoutedEventArgs e)
+        {
+            if (selectedMetier != null)
             {
-                throw;
+                this.libelleTextBox.GetBindingExpression(TextBox.TextProperty).UpdateSource();
+                this.listeDomaineMetier.GetBindingExpression(ComboBox.SelectedItemProperty).UpdateSource();
+
+                if (VerificationFormulaire())
+                {
+                    try
+                    {
+                        App.dbContext.SaveChangesAsync();
+                        MessageBox.Show("Métier enregistré", "Validation", MessageBoxButton.OK, MessageBoxImage.Information);
+                    }
+                    catch (Exception)
+                    {
+
+                        throw;
+                    }
+                }
             }
         }
     }

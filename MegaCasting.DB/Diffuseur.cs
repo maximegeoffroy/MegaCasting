@@ -14,6 +14,12 @@ namespace MegaCasting.DB
     
     public partial class Diffuseur : Societe
     {
-        public Nullable<int> NbAnnonces { get; set; }
+    
+        public virtual Societe Societe { get; set; }
+
+        public override string ToString()
+        {
+            return this.RaisonSociale;
+        }
     }
 }

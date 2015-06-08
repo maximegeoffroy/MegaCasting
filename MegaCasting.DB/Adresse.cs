@@ -22,7 +22,7 @@ namespace MegaCasting.DB
         public long Identifiant { get; set; }
         public Nullable<int> Numero { get; set; }
         public string Rue { get; set; }
-        public int CodePostal { get; set; }
+        public string CodePostal { get; set; }
         public string Ville { get; set; }
     
         public virtual ICollection<Societe> Societes { get; set; }

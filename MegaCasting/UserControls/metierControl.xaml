@@ -8,35 +8,57 @@
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="120"/>
+            <ColumnDefinition Width="300"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Grid Grid.Row="1">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>    
-            </Grid.RowDefinitions>
-            <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal" Margin="0,25,0,0" HorizontalAlignment="Right" VerticalAlignment="Center">
-                <Label>Libellé</Label>
-                <TextBox Width="150" Text="{Binding selectedMetier.Libelle, UpdateSourceTrigger=PropertyChanged}"/>
-            </StackPanel>
-            <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Horizontal" Margin="0,25,0,0" HorizontalAlignment="Right" VerticalAlignment="Center">
-                <Label>Domaine Métier</Label>
-                <ComboBox x:Name="listeDomaineMetier" Width="150" ItemsSource="{Binding DomaineMetiers}" SelectedItem="{Binding selectedMetier.Domaine_Metier}"/> 
-            </StackPanel>
-        </Grid>
-        <StackPanel Grid.Column="1" Orientation="Vertical">
-            <ListBox x:Name="listeMetier" ItemsSource="{Binding Metiers}" SelectedItem="{Binding selectedMetier}" SelectedIndex="0">
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <Label Content="{Binding Libelle}"></Label>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
-            <Button Grid.Column="1" x:Name="boutonSupprimer" Content="Supprimer" Click="boutonSupprimer_Click"/>
-            <Button Grid.Column="1" x:Name="boutonNouveau" Content="Nouveau" Click="boutonNouveau_Click"/>
-        </StackPanel>
+        <GroupBox Grid.Column="0" Grid.Row="0" Margin="5">
+            <GroupBox.Header>
+                <Label FontSize="20">Gestion des métiers</Label>
+            </GroupBox.Header>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="300"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" Margin="0 25 0 0">Libellé</Label>
+                <TextBox x:Name="libelleTextBox" Grid.Row="0" Grid.Column="1" Width="200" HorizontalAlignment="Left" Margin="0 25 0 0" Text="{Binding selectedMetier.Libelle, UpdateSourceTrigger=Explicit}"/>
+                <Label Grid.Row="1" Grid.Column="1" x:Name="labelErreurLibelle" Visibility="Hidden" Foreground="Red" HorizontalAlignment="Left">Erreur de libellé</Label>
+                <Label Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" Margin="0 25 0 0">Domaine Métier</Label>
+                <ComboBox x:Name="listeDomaineMetier" Grid.Row="1" Grid.Column="1" Width="200" Margin="0 25 0 0" HorizontalAlignment="Left" ItemsSource="{Binding DomaineMetiers}" SelectedItem="{Binding selectedMetier.Domaine_Metier, UpdateSourceTrigger=Explicit}"/>
+                <Button Grid.Row="3" Grid.Column="1" x:Name="boutonEnregistrer" Content="Enregistrer" HorizontalAlignment="Left" Margin="0 25 0 0" Click="boutonEnregistrer_Click" />
+            </Grid>
+        </GroupBox>
+        <GroupBox Grid.Column="1" Grid.Row="0" Margin="5">
+            <GroupBox.Header>
+                <Label FontSize="20">Liste des métiers</Label>
+            </GroupBox.Header>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <ListBox Grid.Row="0" Grid.Column="0" x:Name="listeMetier" ItemsSource="{Binding Metiers}" SelectedItem="{Binding selectedMetier}" SelectedIndex="0">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Label Content="{Binding Libelle}"></Label>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+                <Button Grid.Column="0" Grid.Row="1" x:Name="boutonSupprimer" Content="Supprimer" Click="boutonSupprimer_Click"/>
+                <Button Grid.Column="0" Grid.Row="2" x:Name="boutonNouveau" Content="Nouveau" Click="boutonNouveau_Click"/>
+            </Grid>
+        </GroupBox>
     </Grid>
 </UserControl>

@@ -8,51 +8,90 @@
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="120"/>
+            <ColumnDefinition Width="300"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Grid Grid.Row="1">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
-            </Grid.RowDefinitions>
-            <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal" Margin="0,25,0,0" HorizontalAlignment="Right" VerticalAlignment="Center">
-                <Label>Raison Sociale</Label>
-                <TextBox Width="150" Text="{Binding selectedSociete.RaisonSociale, UpdateSourceTrigger=PropertyChanged}"/>
-            </StackPanel>
-            <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Horizontal" Margin="0,25,0,0" HorizontalAlignment="Right" VerticalAlignment="Center">
-                <Label>Téléphone</Label>
-                <TextBox Width="150" Text="{Binding selectedSociete.Telephone, UpdateSourceTrigger=PropertyChanged}"/>
-            </StackPanel>
-            <StackPanel Grid.Row="2" Grid.Column="0" Orientation="Horizontal" Margin="0,25,0,0" HorizontalAlignment="Right" VerticalAlignment="Center">
-                <Label>E-mail</Label>
-                <TextBox Width="150" Text="{Binding selectedSociete.Email, UpdateSourceTrigger=PropertyChanged}"/>
-            </StackPanel>
-            <StackPanel Grid.Row="3" Grid.Column="0" Orientation="Horizontal" Margin="0,25,0,0" HorizontalAlignment="Right" VerticalAlignment="Center">
-                <Label>Numéro SIRET</Label>
-                <TextBox Width="150" Text="{Binding selectedSociete.NumeroSiret, UpdateSourceTrigger=PropertyChanged}"/>
-            </StackPanel>
-            <StackPanel Grid.Row="4" Grid.Column="0" Orientation="Horizontal" Margin="0,25,0,0" HorizontalAlignment="Right" VerticalAlignment="Center">
-                <Label>Domaine Métier</Label>
-                
-            </StackPanel>
-        </Grid>
-        <StackPanel Grid.Column="1" Orientation="Vertical">
-            <ListBox x:Name="listeSociete" ItemsSource="{Binding Societes}" SelectedItem="{Binding selectedSociete}" SelectedIndex="0">
+        <GroupBox Grid.Column="0" Margin="5">
+            <GroupBox.Header>
+                <Label FontSize="20">Gestion des sociétés</Label>
+            </GroupBox.Header>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="300"/>
+                    <ColumnDefinition Width="auto"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                    <Label Grid.Row="0" Grid.Column="0" Margin="0 25 0 0" HorizontalAlignment="Center">Raison Sociale</Label>
+                    <TextBox Grid.Row="0" Grid.Column="1" x:Name="textBoxRaisonSociale" Width="200" Margin="0 25 0 0" HorizontalAlignment="Left" Text="{Binding selectedSociete.RaisonSociale, UpdateSourceTrigger=Explicit}"/>
+                    <Label Grid.Row="1" Grid.Column="1" x:Name="labelErreurRaisonSociale" Visibility="Hidden" Foreground="Red" HorizontalAlignment="Left">Erreur de raison sociale</Label>
+                    <Label Grid.Row="1" Grid.Column="0" Margin="0 25 0 0" HorizontalAlignment="Center">Téléphone</Label>
+                    <TextBox Grid.Row="1" Grid.Column="1" x:Name="textBoxTelephone" Width="200" Margin="0 25 0 0" HorizontalAlignment="Left" Text="{Binding selectedSociete.Telephone, UpdateSourceTrigger=Explicit}"/>
+                    <Label Grid.Row="2" Grid.Column="1" x:Name="labelErreurTelephone" Visibility="Hidden" Foreground="Red" HorizontalAlignment="Left">Erreur de téléphone</Label>
+                    <Label Grid.Row="2" Grid.Column="0" Margin="0 25 0 0" HorizontalAlignment="Center">E-mail</Label>
+                    <TextBox Grid.Row="2" Grid.Column="1" x:Name="textBoxEmail" Width="200" Margin="0 25 0 0" HorizontalAlignment="Left" Text="{Binding selectedSociete.Email, UpdateSourceTrigger=Explicit}"/>
+                    <Label Grid.Row="3" Grid.Column="1" x:Name="labelErreurEmail" Visibility="Hidden" Foreground="Red" HorizontalAlignment="Left">Erreur sur l'email</Label>
+                    <Label Grid.Row="3" Grid.Column="0" Margin="0 25 0 0" HorizontalAlignment="Center">Numéro SIRET</Label>
+                    <TextBox Grid.Row="3" Grid.Column="1" x:Name="textBoxSiret" Width="200" Margin="0 25 0 0" HorizontalAlignment="Left" Text="{Binding selectedSociete.NumeroSiret, UpdateSourceTrigger=Explicit}"/>
+                    <Label Grid.Row="4" Grid.Column="1" x:Name="labelErreurSiret" Visibility="Hidden" Foreground="Red" HorizontalAlignment="Left">Erreur de numéro de siret</Label>
+                    <Label Grid.Row="4" Grid.Column="0" Margin="0 25 0 0" HorizontalAlignment="Center">Annonceur/Diffuseur</Label>
+                    <StackPanel Grid.Row="4" Grid.Column="1" HorizontalAlignment="Left" Orientation="Horizontal" Margin="0 25 0 0">
+                        <RadioButton x:Name="radioAnnonceur" GroupName="TypeSociete" Content="Annonceur" Margin="0 0 25 0"/>
+                        <RadioButton x:Name="radioDiffuseur" GroupName="TypeSociete" Content="Diffuseur"/>
+                    </StackPanel>
+                    <Label Grid.Row="5" Grid.Column="1" x:Name="labelCheckBoxesErreur" Visibility="Hidden" Foreground="Red" HorizontalAlignment="Left">Erreur sur annonceur/diffuseur</Label>
+                    <Label Grid.Row="5" Grid.Column="0" HorizontalAlignment="Center" Margin="0 25 0 0" FontSize="15" FontWeight="SemiBold">Adresse :</Label>
+                    <Label Grid.Row="6" Grid.Column="0" HorizontalAlignment="Center" Margin="10 25 0 0">Numéro</Label>
+                    <TextBox Grid.Row="6" Grid.Column="1" x:Name="textBoxAdresseNumero" Width="200" Margin="0 25 0 0" HorizontalAlignment="Left" Text="{Binding selectedSociete.Adresse.Numero, UpdateSourceTrigger=Explicit}"/>
+                    <Label Grid.Row="7" Grid.Column="1" x:Name="labelErreurAdresseNumero" Visibility="Hidden" Foreground="Red" HorizontalAlignment="Left">Erreur sur le numéro de rue</Label>
+                    <Label Grid.Row="7" Grid.Column="0" HorizontalAlignment="Center" Margin="10 25 0 0">Rue</Label>
+                    <TextBox Grid.Row="7" Grid.Column="1" x:Name="textBoxAdresseRue" Width="200" Margin="0 25 0 0" HorizontalAlignment="Left" Text="{Binding selectedSociete.Adresse.Rue, UpdateSourceTrigger=Explicit}"/>
+                    <Label Grid.Row="8" Grid.Column="1" x:Name="labelErreurAdresseRue" Visibility="Hidden" Foreground="Red" HorizontalAlignment="Left">Erreur sur la rue</Label>
+                    <Label Grid.Row="8" Grid.Column="0" HorizontalAlignment="Center" Margin="10 25 0 0">Code Postal</Label>
+                    <TextBox Grid.Row="8" Grid.Column="1" x:Name="textBoxAdresseCodePostal" Width="200" Margin="0 25 0 0" HorizontalAlignment="Left" Text="{Binding selectedSociete.Adresse.CodePostal, UpdateSourceTrigger=Explicit}"/>
+                    <Label Grid.Row="9" Grid.Column="1" x:Name="labelErreurAdresseCodePostal" Visibility="Hidden" Foreground="Red" HorizontalAlignment="Left">Erreur sur le code postal</Label>
+                    <Label Grid.Row="9" Grid.Column="0" HorizontalAlignment="Center" Margin="10 25 0 0">Ville</Label>
+                    <TextBox Grid.Row="9" Grid.Column="1" x:Name="textBoxAdresseVille" Width="200" Margin="0 25 0 0" HorizontalAlignment="Left" Text="{Binding selectedSociete.Adresse.Ville, UpdateSourceTrigger=Explicit}"/>
+                    <Label Grid.Row="10" Grid.Column="1" x:Name="labelErreurAdresseVille" Visibility="Hidden" Foreground="Red" HorizontalAlignment="Left">Erreur sur la ville</Label>
+                    <Button Grid.Row="10" Grid.Column="1" x:Name="boutonEnregistrer" HorizontalAlignment="Left" Width="100" Content="Enregistrer" Margin="0 25 0 0" Click="boutonEnregistrer_Click" />
+            </Grid>
+        </GroupBox>
+        <GroupBox Grid.Column="1" Margin="5">
+            <GroupBox.Header>
+                <Label FontSize="20">Liste des sociétés</Label>
+            </GroupBox.Header>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>            
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+            <ListBox Grid.Row="0" Grid.Column="0" x:Name="listeSociete" ItemsSource="{Binding Societes}" SelectedItem="{Binding selectedSociete}" SelectedIndex="0" SelectionChanged="listeSociete_SelectionChanged">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Label Content="{Binding RaisonSociale}"></Label>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
-            <Button Grid.Column="1" x:Name="boutonSupprimer" Content="Supprimer" Click="boutonSupprimer_Click"/>
-            <Button Grid.Column="1" x:Name="boutonNouveau" Content="Nouveau" Click="boutonNouveau_Click"/>
-        </StackPanel>
-
+                <Button Grid.Column="0" Grid.Row="1" x:Name="boutonSupprimer" Content="Supprimer" Click="boutonSupprimer_Click"/>
+                <Button Grid.Column="0" Grid.Row="2" x:Name="boutonNouveau" Content="Nouveau" Click="boutonNouveau_Click"/>
+            </Grid>
+        </GroupBox>
     </Grid>
 </UserControl>

@@ -25,11 +25,12 @@ namespace MegaCasting.DB
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<Adresse> Adresses { get; set; }
         public virtual DbSet<Domaine_Metier> Domaine_Metier { get; set; }
         public virtual DbSet<Metier> Metiers { get; set; }
         public virtual DbSet<Offre> Offres { get; set; }
         public virtual DbSet<Societe> Societes { get; set; }
         public virtual DbSet<Type_Contrat> Type_Contrat { get; set; }
-        public virtual DbSet<Adresse> Adresses { get; set; }
+        public virtual DbSet<Utilisateur> Utilisateurs { get; set; }
     }
 }

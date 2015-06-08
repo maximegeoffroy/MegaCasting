@@ -12,23 +12,10 @@ namespace MegaCasting.DB
     using System;
     using System.Collections.Generic;
     
-    public partial class Domaine_Metier
+    public partial class Utilisateur
     {
-        public Domaine_Metier()
-        {
-            this.Metiers = new HashSet<Metier>();
-            this.Offres = new HashSet<Offre>();
-        }
-    
         public long Identifiant { get; set; }
-        public string Libelle { get; set; }
-    
-        public virtual ICollection<Metier> Metiers { get; set; }
-        public virtual ICollection<Offre> Offres { get; set; }
-
-        public override string ToString()
-        {
-            return this.Libelle;
-        }
+        public string Nom { get; set; }
+        public string Password { get; set; }
     }
 }

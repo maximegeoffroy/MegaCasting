@@ -1,47 +1,64 @@
 ﻿<Window x:Class="MegaCasting.Windows.ajouterSociete"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="ajouterSociete" Height="300" Width="300">
+        Title="Ajouter une société" Height="650" Width="600">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="120"/>
+            <ColumnDefinition Width="auto"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Grid Grid.Row="1">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="300"/>
+                    <ColumnDefinition Width="auto"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
-            <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal" Margin="0,25,0,0" HorizontalAlignment="Right" VerticalAlignment="Center">
-                <Label>Raison Sociale</Label>
-                <TextBox Width="150"/>
-            </StackPanel>
-            <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Horizontal" Margin="0,25,0,0" HorizontalAlignment="Right" VerticalAlignment="Center">
-                <Label>Téléphone</Label>
-                <TextBox Width="150"/>
-            </StackPanel>
-            <StackPanel Grid.Row="2" Grid.Column="0" Orientation="Horizontal" Margin="0,25,0,0" HorizontalAlignment="Right" VerticalAlignment="Center">
-                <Label>E-mail</Label>
-                <TextBox Width="150"/>
-            </StackPanel>
-            <StackPanel Grid.Row="3" Grid.Column="0" Orientation="Horizontal" Margin="0,25,0,0" HorizontalAlignment="Right" VerticalAlignment="Center">
-                <Label>Numéro SIRET</Label>
-                <TextBox Width="150"/>
-            </StackPanel>
-            <StackPanel Grid.Row="4" Grid.Column="0" Orientation="Horizontal" Margin="0,25,0,0" HorizontalAlignment="Right" VerticalAlignment="Center">
-                <Label>Domaine Métier</Label>
-
-            </StackPanel>
-            <Button Grid.Column="0" Grid.Row="5" x:Name="boutonAjouter" Content="Supprimer" Click="boutonAjouter_Click"/>
+                <Label Grid.Row="0" Grid.Column="0" Margin="0 25 0 0" HorizontalAlignment="Center">Raison Sociale</Label>
+                <TextBox Grid.Row="0" Grid.Column="1" x:Name="textBoxRaisonSociale" Width="200" Margin="0 25 0 0" HorizontalAlignment="Left" Text="{Binding selectedSociete.RaisonSociale, UpdateSourceTrigger=Explicit}"/>
+                <Label Grid.Row="1" Grid.Column="1" x:Name="labelErreurRaisonSociale" Visibility="Hidden" Foreground="Red" HorizontalAlignment="Left">Erreur sur la raison sociale</Label>
+                <Label Grid.Row="1" Grid.Column="0" Margin="0 25 0 0" HorizontalAlignment="Center">Téléphone</Label>
+                <TextBox Grid.Row="1" Grid.Column="1" x:Name="textBoxTelephone" Width="200" Margin="0 25 0 0" HorizontalAlignment="Left" Text="{Binding selectedSociete.Telephone, UpdateSourceTrigger=Explicit}"/>
+                <Label Grid.Row="2" Grid.Column="1" x:Name="labelErreurTelephone" Visibility="Hidden" Foreground="Red" HorizontalAlignment="Left">Erreur sur le téléphone</Label>
+                <Label Grid.Row="2" Grid.Column="0" Margin="0 25 0 0" HorizontalAlignment="Center">E-mail</Label>
+                <TextBox Grid.Row="2" Grid.Column="1" x:Name="textBoxEmail" Width="200" Margin="0 25 0 0" HorizontalAlignment="Left" Text="{Binding selectedSociete.Email, UpdateSourceTrigger=Explicit}"/>
+                <Label Grid.Row="3" Grid.Column="1" x:Name="labelErreurEmail" Visibility="Hidden" Foreground="Red" HorizontalAlignment="Left">Erreur sur l'email</Label>
+                <Label Grid.Row="3" Grid.Column="0" Margin="0 25 0 0" HorizontalAlignment="Center">Numéro SIRET</Label>
+                <TextBox Grid.Row="3" Grid.Column="1" x:Name="textBoxSiret" Width="200" Margin="0 25 0 0" HorizontalAlignment="Left" Text="{Binding selectedSociete.NumeroSiret, UpdateSourceTrigger=Explicit}"/>
+                <Label Grid.Row="4" Grid.Column="1" x:Name="labelErreurSiret" Visibility="Hidden" Foreground="Red" HorizontalAlignment="Left">Erreur sur le numéro de siret</Label>
+                <Label Grid.Row="4" Grid.Column="0" Margin="0 25 0 0" HorizontalAlignment="Center">Annonceur/Diffuseur</Label>
+                <StackPanel Grid.Row="4" Grid.Column="1" HorizontalAlignment="Left" Orientation="Horizontal" Margin="0 25 0 0">
+                <RadioButton x:Name="radioAnnonceur" GroupName="TypeSociete" Content="Annonceur" Margin="0 0 25 0" IsChecked="True"/>
+                <RadioButton x:Name="radioDiffuseur" GroupName="TypeSociete" Content="Diffuseur"/>
+                </StackPanel>
+                <Label Grid.Row="5" Grid.Column="1" x:Name="labelCheckBoxesErreur" Visibility="Hidden" Foreground="Red" HorizontalAlignment="Left">Erreur sur annonceur/diffuseur</Label>
+                <Label Grid.Row="5" Grid.Column="0" HorizontalAlignment="Center" Margin="0 25 0 0" FontSize="15" FontWeight="SemiBold">Adresse :</Label>
+                <Label Grid.Row="6" Grid.Column="0" HorizontalAlignment="Center" Margin="10 25 0 0">Numéro</Label>
+                <TextBox Grid.Row="6" Grid.Column="1" x:Name="textBoxAdresseNumero" Width="200" Margin="0 25 0 0" HorizontalAlignment="Left"/>
+                <Label Grid.Row="7" Grid.Column="1" x:Name="labelErreurAdresseNumero" Visibility="Hidden" Foreground="Red" HorizontalAlignment="Left">Erreur sur le numéro de rue</Label>
+                <Label Grid.Row="7" Grid.Column="0" HorizontalAlignment="Center" Margin="10 25 0 0">Rue</Label>
+                <TextBox Grid.Row="7" Grid.Column="1" x:Name="textBoxAdresseRue" Width="200" Margin="0 25 0 0" HorizontalAlignment="Left"/>
+                <Label Grid.Row="8" Grid.Column="1" x:Name="labelErreurAdresseRue" Visibility="Hidden" Foreground="Red" HorizontalAlignment="Left">Erreur sur la rue</Label>
+                <Label Grid.Row="8" Grid.Column="0" HorizontalAlignment="Center" Margin="10 25 0 0">Code Postal</Label>
+                <TextBox Grid.Row="8" Grid.Column="1" x:Name="textBoxAdresseCodePostal" Width="200" Margin="0 25 0 0" HorizontalAlignment="Left"/>
+                <Label Grid.Row="9" Grid.Column="1" x:Name="labelErreurAdresseCodePostal" Visibility="Hidden" Foreground="Red" HorizontalAlignment="Left">Erreur sur le code postal</Label>
+                <Label Grid.Row="9" Grid.Column="0" HorizontalAlignment="Center" Margin="10 25 0 0">Ville</Label>
+                <TextBox Grid.Row="9" Grid.Column="1" x:Name="textBoxAdresseVille" Width="200" Margin="0 25 0 0" HorizontalAlignment="Left"/>
+                <Label Grid.Row="10" Grid.Column="1" x:Name="labelErreurAdresseVille" Visibility="Hidden" Foreground="Red" HorizontalAlignment="Left">Erreur sur la ville</Label>
+                <Button Grid.Row="10" Grid.Column="1" x:Name="boutonAjouter" HorizontalAlignment="Left" Width="100" Content="Ajouter" Margin="0 25 0 0" Click="boutonAjouter_Click"/>
         </Grid>
-        
-
     </Grid>
 </Window>

@@ -8,30 +8,53 @@
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="120"/>
+            <ColumnDefinition Width="300"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Grid Grid.Row="1">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="auto"/>
-            </Grid.RowDefinitions>
-            <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal" Margin="0,25,0,0" HorizontalAlignment="Right" VerticalAlignment="Center">
-                <Label>Libellé</Label>
-                <TextBox Width="150" Text="{Binding selectedDomaineMetier.Libelle, UpdateSourceTrigger=PropertyChanged}"/>
-            </StackPanel>
-        </Grid>
-        <StackPanel Grid.Column="1" Orientation="Vertical">
-            <ListBox x:Name="listeDomaineMetier" ItemsSource="{Binding DomaineMetiers}" SelectedItem="{Binding selectedDomaineMetier}" SelectedIndex="0">
+        <GroupBox Grid.Column="0" Grid.Row="0" Margin="5">
+            <GroupBox.Header>
+                <Label FontSize="20">Gestion des domaines métier</Label>
+            </GroupBox.Header>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="300"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" Margin="0 25 0 0">Libellé</Label>
+                <TextBox Grid.Row="0" Grid.Column="1" x:Name="textBoxLibelle" Width="150" HorizontalAlignment="Left" Margin="0 25 0 0" Text="{Binding selectedDomaineMetier.Libelle, UpdateSourceTrigger=Explicit}"/>
+                <Label Grid.Row="1" Grid.Column="1" x:Name="labelErreurLibelle" Visibility="Hidden" HorizontalAlignment="Left" Foreground="Red">Erreur dans le libellé</Label>
+                <Button Grid.Row="1" Grid.Column="1" x:Name="boutonEnregistrer" HorizontalAlignment="Left" Content="Enregistrer" Margin="0 25 0 0" Width="100" Click="boutonEnregistrer_Click" />
+            </Grid>
+        </GroupBox>
+        <GroupBox Grid.Row="0" Grid.Column="1" Margin="5">
+            <GroupBox.Header>
+                <Label FontSize="20">Liste des domaines métier</Label>
+            </GroupBox.Header>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+            <ListBox Grid.Column="0" Grid.Row="0" x:Name="listeDomaineMetier" ItemsSource="{Binding DomaineMetiers}" SelectedItem="{Binding selectedDomaineMetier}" SelectedIndex="0">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Label Content="{Binding Libelle}"></Label>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
-            <Button Grid.Column="1" x:Name="boutonSupprimer" Content="Supprimer" Click="boutonSupprimer_Click"/>
-            <Button Grid.Column="1" x:Name="boutonNouveau" Content="Nouveau" Click="boutonNouveau_Click"/>
-        </StackPanel>
+            <Button Grid.Row="1" x:Name="boutonSupprimer" Content="Supprimer" Click="boutonSupprimer_Click"/>
+            <Button Grid.Row="2" x:Name="boutonNouveau" Content="Nouveau" Click="boutonNouveau_Click"/>
+            </Grid>
+        </GroupBox>
     </Grid>
 </UserControl>

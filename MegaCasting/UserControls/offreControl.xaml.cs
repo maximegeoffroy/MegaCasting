@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -12,6 +13,7 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
@@ -72,6 +74,7 @@ namespace MegaCasting.UserControls
             InitializeComponent();
 
             Chargement();
+
         }
 
         public void Chargement()
@@ -97,13 +100,152 @@ namespace MegaCasting.UserControls
             );
         }
 
+        public Boolean VerificationFormulaire()
+        {
+            this.CacheStackPanel();
+            Boolean ok = true;
+
+            if (selectedOffre.Intitule == null || selectedOffre.Intitule.Trim() == "")
+            {
+                this.labelErreurIntitule.Visibility = System.Windows.Visibility.Visible;
+                ok = false;
+            }
+
+
+            if (selectedOffre.Reference == null || selectedOffre.Reference.Trim() == "")
+            {
+                this.labelErreurReference.Visibility = System.Windows.Visibility.Visible;
+                ok = false;
+            }
+
+            if (selectedOffre.DureeDiffusion <= 0 || this.textBoxDureeDiffusion.Text.Trim() == "")
+            {
+                this.labelErreurDureeDiffusion.Visibility = System.Windows.Visibility.Visible;
+                ok = false;
+            }
+
+            if (selectedOffre.DateDebutContrat <= selectedOffre.DatePublication)
+            {
+                this.labelErreurDateDebutContrat.Visibility = System.Windows.Visibility.Visible;
+                ok = false;
+            }
+
+            if (selectedOffre.NbPostes <= 0 || this.textBoxNbPoste.Text.Trim() == "")
+            {
+                this.labelErreurNbPoste.Visibility = System.Windows.Visibility.Visible;
+                ok = false;
+            }
+
+            if (selectedOffre.DescriptionPoste == null || selectedOffre.DescriptionPoste.Trim() == "")
+            {
+                this.labelErreurDescriptionPoste.Visibility = System.Windows.Visibility.Visible;
+                ok = false;
+            }
+
+            if (selectedOffre.DescriptionProfil == null || selectedOffre.DescriptionProfil.Trim() == "")
+            {
+                this.labelErreurDescriptionProfil.Visibility = System.Windows.Visibility.Visible;
+                ok = false;
+            }
+
+            if (selectedOffre.Telephone == null || !regexTelephone(selectedOffre.Telephone))
+            {
+                this.labelErreurTelephone.Visibility = System.Windows.Visibility.Visible;
+                ok = false;
+            }
+
+            if (selectedOffre.Email == null || !regexEmail(selectedOffre.Email))
+            {
+                this.labelErreurEmail.Visibility = System.Windows.Visibility.Visible;
+                ok = false;
+            }
+            return ok;
+        }
+
+        public void CacheStackPanel()
+        {
+            this.labelErreurIntitule.Visibility = System.Windows.Visibility.Hidden;
+            this.labelErreurReference.Visibility = System.Windows.Visibility.Hidden;
+            this.labelErreurDatePublication.Visibility = System.Windows.Visibility.Hidden;
+            this.labelErreurDureeDiffusion.Visibility = System.Windows.Visibility.Hidden;
+            this.labelErreurDateDebutContrat.Visibility = System.Windows.Visibility.Hidden;
+            this.labelErreurNbPoste.Visibility = System.Windows.Visibility.Hidden;
+            this.labelErreurDescriptionPoste.Visibility = System.Windows.Visibility.Hidden;
+            this.labelErreurDescriptionProfil.Visibility = System.Windows.Visibility.Hidden;
+            this.labelErreurTelephone.Visibility = System.Windows.Visibility.Hidden;
+            this.labelErreurEmail.Visibility = System.Windows.Visibility.Hidden;
+        }
+
+        public void UpdateSources()
+        {
+            this.textBoxIntitule.GetBindingExpression(TextBox.TextProperty).UpdateSource();
+            this.textBoxReference.GetBindingExpression(TextBox.TextProperty).UpdateSource();
+            this.datePickerDatePublication.GetBindingExpression(DatePicker.SelectedDateProperty).UpdateSource();
+            this.textBoxDureeDiffusion.GetBindingExpression(TextBox.TextProperty).UpdateSource();
+            this.datePickerDateDebutContrat.GetBindingExpression(DatePicker.SelectedDateProperty).UpdateSource();
+            this.textBoxNbPoste.GetBindingExpression(TextBox.TextProperty).UpdateSource();
+            this.textBoxLocalisation.GetBindingExpression(TextBox.TextProperty).UpdateSource();
+            this.textBoxDescriptionPoste.GetBindingExpression(TextBox.TextProperty).UpdateSource();
+            this.textBoxDescriptionProfil.GetBindingExpression(TextBox.TextProperty).UpdateSource();
+            this.textBoxTelephone.GetBindingExpression(TextBox.TextProperty).UpdateSource();
+            this.textBoxEmail.GetBindingExpression(TextBox.TextProperty).UpdateSource();
+            this.listeTypesContrat.GetBindingExpression(ComboBox.SelectedItemProperty).UpdateSource();
+            this.listeMetier.GetBindingExpression(ComboBox.SelectedItemProperty).UpdateSource();
+            this.listeAnnonceurs.GetBindingExpression(ComboBox.SelectedItemProperty).UpdateSource();
+        }
+
+        public Boolean regexTelephone(String telephone)
+        {
+            Regex myRegex = new Regex("^0[1-68]([-. ]?[0-9]{2}){4}$");
+
+            return myRegex.IsMatch(telephone);
+        }
+
+        public Boolean regexEmail(String email)
+        {
+            Regex myRegex = new Regex(@"^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$");
+
+            return myRegex.IsMatch(email);
+        }
+
         private void boutonEnregistrer_Click(object sender, RoutedEventArgs e)
         {
-            Metier m = (Metier)this.listeMetier.SelectedItem;
+            if (selectedOffre != null)
+            {
+                int dureeDiffusion, nbPoste;
+                Metier m = (Metier)this.listeMetier.SelectedItem;
+                selectedOffre.Domaine_Metier = m.Domaine_Metier;
 
-            selectedOffre.Domaine_Metier = m.Domaine_Metier;
+                this.UpdateSources();
 
-            App.dbContext.SaveChangesAsync();
+                if (VerificationFormulaire())
+                {
+                    Boolean dureeDiffusionValide = int.TryParse(this.textBoxDureeDiffusion.Text, out dureeDiffusion);
+                    Boolean nbPosteValide = int.TryParse(this.textBoxNbPoste.Text, out nbPoste);
+                    if (dureeDiffusionValide && nbPosteValide)
+                    {
+                        try
+                        {
+                            App.dbContext.SaveChangesAsync();
+                            MessageBox.Show("Offre enregistrée", "Validation", MessageBoxButton.OK, MessageBoxImage.Information);
+
+                        }
+                        catch (Exception)
+                        {
+
+                            throw;
+                        }
+                    }
+                    else
+                    {
+                        if(dureeDiffusionValide == false)
+                            this.labelErreurDureeDiffusion.Visibility = System.Windows.Visibility.Visible;
+
+                        if (nbPosteValide == false)
+                            this.labelErreurNbPoste.Visibility = System.Windows.Visibility.Visible;
+                    }
+                }
+            }
         }
 
         private void boutonNouvelle_Click(object sender, RoutedEventArgs e)
@@ -122,6 +264,7 @@ namespace MegaCasting.UserControls
                     App.dbContext.SaveChanges();
 
                     Offres.Remove(selectedOffre);
+                    this.listeOffre.SelectedIndex = 0;
                 }
                 catch (Exception)
                 {
@@ -130,6 +273,5 @@ namespace MegaCasting.UserControls
                 }
             }
         }
-
     }
 }

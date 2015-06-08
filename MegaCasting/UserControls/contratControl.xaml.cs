@@ -1,4 +1,4 @@
-﻿using MegaCasting.DB;
+﻿ using MegaCasting.DB;
 using MegaCasting.Windows;
 using System;
 using System.Collections.Generic;
@@ -53,21 +53,43 @@ namespace MegaCasting.UserControls
             );
         }
 
+        public Boolean VerificationFormulaire()
+        {
+            this.labelErreurLibelle.Visibility = System.Windows.Visibility.Hidden;
+            Boolean ok = true;
+
+            if (selectedTypeContrat.Libelle == null | selectedTypeContrat.Libelle.Trim() == "")
+            {
+                this.labelErreurLibelle.Visibility = System.Windows.Visibility.Visible;
+                ok = false;
+            }
+            return ok;
+        }
+
         private void boutonSupprimer_Click(object sender, RoutedEventArgs e)
         {
             if(selectedTypeContrat != null)
             {
-                try 
-	            {	        
-		            App.dbContext.Type_Contrat.Remove(selectedTypeContrat);
-                    App.dbContext.SaveChanges();
+                Offre o = App.dbContext.Offres.FirstOrDefault(oTemp => oTemp.Type_Contrat.Identifiant == selectedTypeContrat.Identifiant);
 
-                    Contrats.Remove(selectedTypeContrat);
-	            }
-	            catch (Exception)
-	            {
-		            throw;
-	            }
+                if (o == null)
+                {
+                    try
+                    {
+                        App.dbContext.Type_Contrat.Remove(selectedTypeContrat);
+                        App.dbContext.SaveChanges();
+
+                        Contrats.Remove(selectedTypeContrat);
+                    }
+                    catch (Exception)
+                    {
+                        throw;
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Impossible de supprimer le type de contrat car il est rataché à une ou plusieurs offre(s)", "Erreur de suppression",MessageBoxButton.OK,MessageBoxImage.Error);
+                }
             }
         }
 
@@ -79,7 +101,24 @@ namespace MegaCasting.UserControls
 
         private void boutonEnregistrer_Click(object sender, RoutedEventArgs e)
         {
-            App.dbContext.SaveChanges();
+            if (selectedTypeContrat != null)
+            {
+                this.libelleTextBox.GetBindingExpression(TextBox.TextProperty).UpdateSource();
+
+                if (VerificationFormulaire())
+                {
+                    try
+                    {
+                        App.dbContext.SaveChangesAsync();
+                        MessageBox.Show("Contrat enregistré", "Validation", MessageBoxButton.OK, MessageBoxImage.Information);
+                    }
+                    catch (Exception)
+                    {
+
+                        throw;
+                    }
+                }
+            }
         }
     }
 }

@@ -20,12 +20,13 @@ namespace MegaCasting.DB
         public string Email { get; set; }
         public string NumeroSiret { get; set; }
         public long IdentifiantAdresse { get; set; }
+    
+        public virtual Adresse Adresse { get; set; }
+        public virtual Diffuseur Diffuseur { get; set; }
 
         public override string ToString()
         {
             return this.RaisonSociale;
         }
-    
-        public virtual Adresse Adresse { get; set; }
     }
 }

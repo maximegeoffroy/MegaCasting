@@ -30,15 +30,15 @@ namespace MegaCasting.DB
         public long IdentifiantMetier { get; set; }
         public long IdentifiantDomaine_Metier { get; set; }
         public long IdentifiantAnnonceur { get; set; }
-
-        public override string ToString()
-        {
-            return this.Intitule;
-        }
     
         public virtual Annonceur Annonceur { get; set; }
         public virtual Domaine_Metier Domaine_Metier { get; set; }
         public virtual Metier Metier { get; set; }
         public virtual Type_Contrat Type_Contrat { get; set; }
+
+        public override string ToString()
+        {
+            return this.Intitule;
+        }
     }
 }

@@ -1,0 +1,28 @@
+﻿<Window x:Class="MegaCasting.Connexion"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Connexion" Height="300" Width="300">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Row="1" Grid.Column="1">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Label Content="Nom d'utilsateur"/>
+                <TextBox x:Name="textBoxNomUtilisateur" Width="150" KeyUp="textBoxNomUtilisateur_KeyUp"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 20 0 0">
+                <Label Content="Mot de passe"/>
+                <PasswordBox x:Name="passwordBox" Width="150" />
+            </StackPanel>
+            <Button x:Name="boutonConnexion" Content="Connexion" Margin="0 20 0 0" Width="100" Click="boutonConnexion_Click" IsEnabled="False" />
+        </StackPanel>
+    </Grid>
+</Window>

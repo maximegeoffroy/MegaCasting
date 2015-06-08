@@ -229,6 +229,6 @@
                 </StackPanel>
             </Grid>
         </StackPanel>
-        <Button Grid.Row="6" Grid.Column="1" x:Name="boutonAjouter" Width="100" Content="Ajouter" Margin="0,25,20,0" Click="boutonAjouter_Click" HorizontalAlignment="Right"/>
+        <Button Grid.Row="6" Grid.Column="1" x:Name="boutonAjouter" Content="Ajouter" Margin="0,25,20,0" Click="boutonAjouter_Click" HorizontalAlignment="Right"/>
     </Grid>
 </Window>

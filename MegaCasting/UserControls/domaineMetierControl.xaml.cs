@@ -57,25 +57,73 @@ namespace MegaCasting.UserControls
                 );
         }
 
+        public Boolean VerificationFormulaire()
+        {
+            this.labelErreurLibelle.Visibility = System.Windows.Visibility.Hidden;
+            Boolean ok = true;
+
+            if (selectedDomaineMetier.Libelle == null | selectedDomaineMetier.Libelle.Trim() == "")
+            {
+                this.labelErreurLibelle.Visibility = System.Windows.Visibility.Visible;
+                ok = false;
+            }
+            return ok;
+        }
+
         private void boutonSupprimer_Click(object sender, RoutedEventArgs e)
         {
-            try
+            if (selectedDomaineMetier != null)
             {
-                App.dbContext.Domaine_Metier.Remove(selectedDomaineMetier);
-                App.dbContext.SaveChanges();
+                Metier m = App.dbContext.Metiers.FirstOrDefault(mTemp => mTemp.IdentifiantDomaine_Metier == selectedDomaineMetier.Identifiant);
 
-                DomaineMetiers.Remove(selectedDomaineMetier);
+                if (m == null)
+                {
+                    try
+                    {
+                        App.dbContext.Domaine_Metier.Remove(selectedDomaineMetier);
+                        App.dbContext.SaveChanges();
+
+                        DomaineMetiers.Remove(selectedDomaineMetier);
+                        this.listeDomaineMetier.SelectedIndex = 0;
+                    }
+                    catch (Exception)
+                    {
+                        throw;
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Impossible de supprimer le domaine métier car il est rataché à un ou plusieurs métier(s)", "Erreur de suppression", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             }
-            catch (Exception)
-            {                
-                throw;
-            }            
         }
 
         private void boutonNouveau_Click(object sender, RoutedEventArgs e)
         {
             ajouterDomaineMetier adm = new ajouterDomaineMetier(this);
             adm.Show();
+        }
+
+        private void boutonEnregistrer_Click(object sender, RoutedEventArgs e)
+        {
+            if (selectedDomaineMetier != null)
+            {
+                this.textBoxLibelle.GetBindingExpression(TextBox.TextProperty).UpdateSource();
+
+                if (VerificationFormulaire())
+                {
+                    try
+                    {
+                        App.dbContext.SaveChangesAsync();
+                        MessageBox.Show("Domaine métier enregistré", "Validation", MessageBoxButton.OK, MessageBoxImage.Information);
+                    }
+                    catch (Exception)
+                    {
+
+                        throw;
+                    }
+                }
+            }
         }
     }
 }

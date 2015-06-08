@@ -45,26 +45,41 @@ namespace MegaCasting.Windows
                 );
         }
 
+        public Boolean VerificationFormulaire()
+        {
+            this.labelErreurLibelle.Visibility = System.Windows.Visibility.Hidden;
+            Boolean ok = true;
+
+            if (this.textBoxLibelle.Text.Trim() == "")
+            {
+                this.labelErreurLibelle.Visibility = System.Windows.Visibility.Visible;
+                ok = false;
+            }
+            return ok;
+        }
+
         private void boutonAjouter_Click(object sender, RoutedEventArgs e)
         {
-            Metier m = new Metier();
-            m.Libelle = textBoxLibelle.Text;
-            m.Domaine_Metier = (Domaine_Metier)this.listeDomaineMetier.SelectedItem;
-
-            try
+            if (VerificationFormulaire())
             {
-                App.dbContext.Metiers.Add(m);
-                App.dbContext.SaveChanges();
+                Metier m = new Metier();
+                m.Libelle = textBoxLibelle.Text;
+                m.Domaine_Metier = (Domaine_Metier)this.listeDomaineMetier.SelectedItem;
 
-                this.parentMetierControl.Metiers.Add(m);
-                this.parentMetierControl.selectedMetier = m;
-                this.Close();
-            }
-            catch (Exception)
-            {                
-                throw;
-            }
+                try
+                {
+                    App.dbContext.Metiers.Add(m);
+                    App.dbContext.SaveChanges();
 
+                    this.parentMetierControl.Metiers.Add(m);
+                    this.parentMetierControl.selectedMetier = m;
+                    this.Close();
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+            }
         }
     }
 }

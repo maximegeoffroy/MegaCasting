@@ -19,8 +19,12 @@ namespace MegaCasting.DB
             this.Offres = new HashSet<Offre>();
         }
     
-        public Nullable<int> NbAnnonces { get; set; }
     
         public virtual ICollection<Offre> Offres { get; set; }
+
+        public override string ToString()
+        {
+            return this.RaisonSociale;
+        } 
     }
 }

@@ -118,7 +118,7 @@ namespace MegaCasting.Windows
                 ok = false;
             }
 
-            if (nouvelleOffre.DureeDiffusion <= 0)
+            if (nouvelleOffre.DureeDiffusion <= 0 || this.textBoxDureeDiffusion.Text.Trim() == "")
             {
                 this.stackPanelDureeDiffusion.Visibility = System.Windows.Visibility.Visible;
                 ok = false;
@@ -130,7 +130,7 @@ namespace MegaCasting.Windows
                 ok = false;
             }
 
-            if (nouvelleOffre.NbPostes <= 0)
+            if (nouvelleOffre.NbPostes <= 0 || this.textBoxPoste.Text.Trim() == "")
             {
                 this.stackPanelPoste.Visibility = System.Windows.Visibility.Visible;
                 ok = false;
@@ -180,23 +180,40 @@ namespace MegaCasting.Windows
 
         private void boutonAjouter_Click(object sender, RoutedEventArgs e)
         {
+            int dureeDiffusion, nbPoste;
             nouvelleOffre.Domaine_Metier = nouvelleOffre.Metier.Domaine_Metier;
 
             if (VerificationFormulaire())
             {
-                try
+                Boolean dureeDiffusionValide = int.TryParse(this.textBoxDureeDiffusion.Text, out dureeDiffusion);
+                Boolean nbPosteValide = int.TryParse(this.textBoxPoste.Text, out nbPoste);
+                if(dureeDiffusionValide && nbPosteValide)
                 {
-                    App.dbContext.Offres.Add(nouvelleOffre);
-                    App.dbContext.SaveChanges();
+                    try
+                    {
+                        App.dbContext.Offres.Add(nouvelleOffre);
+                        App.dbContext.SaveChanges();
 
-                    this.parentOffreControl.Offres.Add(nouvelleOffre);
-                    this.parentOffreControl.selectedOffre = nouvelleOffre;
-                    this.Close();
+                        this.parentOffreControl.Offres.Add(nouvelleOffre);
+                        this.parentOffreControl.selectedOffre = nouvelleOffre;
+                        this.Close();
+                    }
+                    catch (Exception)
+                    {
+
+                        throw;
+                    }
                 }
-                catch (Exception)
+                else
                 {
-
-                    throw;
+                    if (dureeDiffusionValide == false)
+                    {
+                        this.stackPanelDureeDiffusion.Visibility = System.Windows.Visibility.Visible;
+                    }
+                    if (nbPosteValide == false)
+                    {
+                        this.stackPanelPoste.Visibility = System.Windows.Visibility.Visible;
+                    }                  
                 }
             }
         }

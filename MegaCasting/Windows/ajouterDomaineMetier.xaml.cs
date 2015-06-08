@@ -31,23 +31,39 @@ namespace MegaCasting.Windows
             InitializeComponent();
         }
 
+        public Boolean VerificationFormulaire()
+        {
+            this.labelErreurLibelle.Visibility = System.Windows.Visibility.Hidden;
+            Boolean ok = true;
+
+            if (this.textBoxLibelle.Text.Trim() == "")
+            {
+                this.labelErreurLibelle.Visibility = System.Windows.Visibility.Visible;
+                ok = false;
+            }
+            return ok;
+        }
+
         private void boutonAjouter_Click(object sender, RoutedEventArgs e)
         {
-            Domaine_Metier dm = new Domaine_Metier();
-            dm.Libelle = this.textBoxLibelle.Text;
-
-            try
+            if (VerificationFormulaire())
             {
-                App.dbContext.Domaine_Metier.Add(dm);
-                App.dbContext.SaveChanges();
+                Domaine_Metier dm = new Domaine_Metier();
+                dm.Libelle = this.textBoxLibelle.Text;
 
-                this.parentDomaineMetierControl.DomaineMetiers.Add(dm);
-                this.parentDomaineMetierControl.selectedDomaineMetier = dm;
-                this.Close();
-            }
-            catch (Exception)
-            {                
-                throw;
+                try
+                {
+                    App.dbContext.Domaine_Metier.Add(dm);
+                    App.dbContext.SaveChanges();
+
+                    this.parentDomaineMetierControl.DomaineMetiers.Add(dm);
+                    this.parentDomaineMetierControl.selectedDomaineMetier = dm;
+                    this.Close();
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
             }
         }
     }

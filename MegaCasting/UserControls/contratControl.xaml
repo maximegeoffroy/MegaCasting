@@ -8,29 +8,53 @@
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="120"/>
+            <ColumnDefinition Width="300"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <StackPanel Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" >
-            <Label>Libellé</Label>
-            <TextBox Width="100" Text="{Binding selectedTypeContrat.Libelle, UpdateSourceTrigger=PropertyChanged}" />
-        </StackPanel>
-        <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <Button x:Name="boutonEnregistrer" Content="Enregistrer" Click="boutonEnregistrer_Click" Width="100"/>
-        </StackPanel>
-        <StackPanel Grid.Column="1" Orientation="Vertical">
-            <ListBox x:Name="listeTypesContrat" ItemsSource="{Binding Contrats}" SelectedItem="{Binding selectedTypeContrat}" SelectedIndex="0">
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <Label Content="{Binding Libelle}"></Label>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
-            <Button x:Name="boutonSupprimer" Grid.Column="1" Content="Supprimer" Click="boutonSupprimer_Click" />
-            <Button x:Name="boutonNouveau" Grid.Column="1" Content="Nouveau" Click="boutonNouveau_Click" />
-        </StackPanel>
+        <GroupBox Grid.Row="0" Grid.Column="0" Margin="5">
+            <GroupBox.Header>
+                <Label FontSize="20">Gestion des contrats</Label>
+            </GroupBox.Header>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="300"/>
+                    <ColumnDefinition Width="auto"/>
+                </Grid.ColumnDefinitions>
+                <Label Grid.Row="0" Grid.Column="0" Margin="0 25 0 0" HorizontalAlignment="Center">Libellé</Label>
+                <TextBox Grid.Row="0" Grid.Column="1" x:Name="libelleTextBox" Width="100" Margin="0 25 0 0" HorizontalAlignment="Left" Text="{Binding selectedTypeContrat.Libelle, UpdateSourceTrigger=Explicit}" />
+                <Label Grid.Row="1" Grid.Column="1" x:Name="labelErreurLibelle" Visibility="Hidden" Foreground="Red" HorizontalAlignment="Left">Erreur dans le libellé</Label>
+                <Button Grid.Row="1" Grid.Column="1" x:Name="boutonEnregistrer" Content="Enregistrer" Margin="0 25 0 0" HorizontalAlignment="Left" Click="boutonEnregistrer_Click" Width="100"/>
+            </Grid>
+        </GroupBox>
+        <GroupBox Grid.Row="0" Grid.Column="1" Margin="5">
+            <GroupBox.Header>
+                <Label FontSize="20">Liste des contrats</Label>
+            </GroupBox.Header>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <ListBox Grid.Row="0" Grid.Column="0" x:Name="listeTypesContrat" ItemsSource="{Binding Contrats}" SelectedItem="{Binding selectedTypeContrat}" SelectedIndex="0">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Label Content="{Binding Libelle}"></Label>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+                <Button Grid.Row="1" Grid.Column="0" x:Name="boutonSupprimer" Content="Supprimer" Click="boutonSupprimer_Click" />
+                <Button Grid.Row="2" Grid.Column="0" x:Name="boutonNouveau" Content="Nouveau" Click="boutonNouveau_Click" />
+            </Grid>
+        </GroupBox>
     </Grid>
 </UserControl>
